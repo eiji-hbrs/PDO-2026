@@ -42,6 +42,7 @@ Connexion PDO - PHP / MySQL, MariaDB, etc ...
     - [Avec `bindValue`](#avec-bindvalue)
   - [Méthode `execute`](#méthode-execute)
     - [Documentation sur `execute`](#documentation-sur-execute)
+    - Suite
 
 
 ## PDO : Présentation
@@ -118,12 +119,6 @@ https://www.php.net/manual/fr/pdo.drivers.php
 
 Nous allons maintenant mettre en pratique ce que nous avons vu dans la partie théorique. N'oubliez pas de créer un dossier à votre nom dans `stagiaires` et d'y mettre vos fichiers.
 
-Ouvrez PHPMyAdmin, sélectionnez `MariaDB` et importez la base de données `pdo_c1.sql` qui se trouve dans le dossier `datas` de ce dépôt.
-
-
-Vous trouverez les fichiers formateurs dans le dossier `formateur`.
-
-Des exercices progressifs vous y seront proposés.
 
 ---
 
@@ -135,7 +130,7 @@ Des exercices progressifs vous y seront proposés.
 
 Créez un fork de ce dépôt sur Github : 
 
-https://github.com/WebDevCF2m2025/PDO-2025-C1
+https://github.com/WebDevCF2m2026/PDO-2026
 
 
 - Créez un **fork** sur votre compte
