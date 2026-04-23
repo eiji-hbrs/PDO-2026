@@ -8,11 +8,20 @@ require_once 'config-dev.php';
 // on essaye de se connecter
 try{
     $db = new PDO(
-        DB_CONNECT_TYPE.":host=",
-        DB_CONNECT_USER."e",
+        // mysql:host=localhost
+        DB_CONNECT_TYPE.":host=".DB_CONNECT_HOST. 
+        // ;dbname=listepays
+        ";dbname=".DB_CONNECT_NAME.
+        // ;port=3307
+        ";port=".DB_CONNECT_PORT.
+        // ;charset=utf8mb4;
+        ";charset=".DB_CONNECT_CHARSET.";"
+        ,
+        // root
+        DB_CONNECT_USER,
+        // ''
         DB_CONNECT_PWD,
     );
-
 
 // si on a une erreur
 // on instancie automatiquement
