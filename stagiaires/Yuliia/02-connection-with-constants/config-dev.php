@@ -1,5 +1,5 @@
 <?php
-# config-dev.php
+# stagiaires\Yuliia\02-connection-with-constants\config-dev.php
 # fichier de configuration de PDO en mode dev.
 # Ce fichier peut être sur github car il ne contient pas de données sensibles
 const DB_CONNECT_TYPE = "mysql"; // MySQL et MariaDB
