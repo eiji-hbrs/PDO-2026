@@ -1,5 +1,5 @@
 <?php
-# config-dev.php
+# stagiaires/Michael/02-connection-with-constent/config-dev.php
 # fichier de configuration de PDO en mode dev
 # Ce fichier peut être sur github 
 # car il ne contient pas de données sensibles
