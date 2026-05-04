@@ -9,6 +9,39 @@ try {
     // arrêt et affichage de l'erreur (ev dev)
     die($e->getMessage());
 }
+// on vérifie si on a envoyé le formulaire
+if(isset($_POST['email_message'],$_POST['texte_message'])){
+    //on va créer de var de traitement:
+    # retorne le mail si valide via expression régulière, sinon false (bool)
+$email=filter_var($_POST['email_message'],FILTER_VALIDATE_EMAIL);
+
+# on retire les balises html pour sécuriser la xhaine (! très sécure seulement
+#si on ne permet aucune balise, l'htmlspecialchar est hautement recommandée )
+$text=strip_tags($_POST['texte_message']);
+
+# on retire les espaces vides devant et derrière la chaine
+$text =trim($text);
+
+# on convertit les carectères spéciaux  dangereux pour injectionSQL et/ou XSS
+# en entité($text)
+
+$text=htmlspecialchars($text);
+
+// si le mail ne vaut pas (strictement) false ET que  le texte est vide
+if($email !== false  && $text !== ""){
+
+//preparation de la requete (pour s'habituer ;-)
+$sql="INSERT INTO `message`(`email_message`,`texte_message`)
+VALUES ('$email' ,'$text');";
+
+// exécution de l'insertion qui contiendra le nombre de ligne affectées par la requete
+$nb_affected_line=$connectDB->exec($sql);
+
+// si au mois une ligne est affecteé (1== true 0== false)
+if($nb_affected_line)$thanks="Merci pour l'ajout!";
+}
+
+}
 // on récupére les messages
 $request = $connectDB->query("SELECT * FROM `message`");
 
@@ -41,9 +74,21 @@ $connectDB = null;
 <body>
     <h1>Livre d'or | Evénement ABC</h1>
     <p>Merci de me laisser un message sur l'événement ABC</p>
+    <?php 
+    if (isset($thanks)):
+    ?>
+    <h3><?= $thanks ?></h3>
+    <script>
+        setTimeout(()=>{
+window.location.href="./";
+        },"3000")
+    </script>
+    <?php
+    endif
+     ?>
     <form action="" method="POST" name="message">
         <input type="text" name="email_message" placeholder="Votre mail"> <br>
-        <textarea name="texte_message" placeholder="VOtre message"></textarea> <br>
+        <textarea name="texte_message" placeholder="Votre message"></textarea> <br>
         <input type="submit" value="Envoyer">
         <?php
         var_dump($_POST);
