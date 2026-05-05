@@ -5,5 +5,5 @@ function insertLivre(){
 }
 
 function readLivres(){
-    return "nos livres";
+    return "Nos livres";
 }
