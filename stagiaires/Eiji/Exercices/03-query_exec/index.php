@@ -32,7 +32,18 @@ if(isset($_POST['email'],$_POST['title'],$_POST['text'])){
         if($email===false || empty($title) || empty($text)){
             $erreur = "Bien essayé, <a href='javascript:history.go(-1)'>recommence</a>";
         }else{
-            $db->exec("INSERT INTO `livre` (`email`,`title`,`text`) VALUES (`$email`,`$title`,`$text`);");
+            // execuction de la requête 
+            $nbRoaw = $db->exec("INSERT INTO `livre` (`email`,`title`,`text`) VALUES (`$email`,`$title`,`$text`);");
+            
+            // Notre résultat vaut 1 ($nbRow == 1 ; $nbRow == true ; $nbRow;)
+            if($nbRow)
+                $reussite = "<h3>Merci pour votre message</h3> <script> 
+                // redirection JS
+                setTime(
+                ()=> {
+                    window.location.href='./';
+                }
+                , '3000'); </script>";
         }
 }
 
@@ -43,20 +54,26 @@ $request = $db->query($sql);
 // on va compter le emailbre de résultat
 $nbArticle = $request->rowCount();
 
-// si pas au moins un article 
-if ($nbArticle === 0){
-    $message = "Pas encore de commentaires";
-}elseif ($nbArticle === 1){
-    $message = "Nous avons $nbArticle commentaire";
-}else{
-    $message = "Nous avons $nbArticle commentaire";
-}
+// transformation du ou des résultats en tableaux indexé contenant des tableaux associatifs
+// (lisible par PHP)
+$articles = $request->fetchAll(PDO::FETCH_ASSOC);
 
 // pour la bonne pratique, tjrs avant de fermer son PHP ↓
 // bonne pratique
 $request->closeCursor();
 // bonne pratique DB
 $db = null;
+
+// si pas au moins un article 
+if ($nbArticle === 0){
+    $message = "Pas encore de commentaires";
+}elseif ($nbArticle === 1){
+    $message = "Nous avons $nbArticle commentaire";
+}else{
+    $message = "Nous avons $nbArticle commentaires";
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,8 +142,8 @@ $db = null;
                 <input type="text" name="text" id="text" required>
 
                 <input type="submit" value="ENVOYER" id="submit">    
-
             </form>
+            
         </body>
 
         </html>
