@@ -87,6 +87,11 @@ body{
 .reponse{
 max-width: 500px;
 margin: 0 auto;
+background-color: rgba(123, 178, 241, 0.7);
+padding: 10px;
+margin-bottom: 20px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+border-radius: 8px;
 }
  
 form{
@@ -184,7 +189,6 @@ input[type="submit"]{
                     <h5>ID: <?= $result['id_message'] ?> | <?= $result['email_message'] ?> a écrit à <?= $result['date_message'] ?></h5>
                     <p><?= nl2br(htmlspecialchars($result['texte_message'])); // retour automatique à la ligne 
                         ?></p>
-                        <hr>
                 </div>
         <?php
             endforeach;
