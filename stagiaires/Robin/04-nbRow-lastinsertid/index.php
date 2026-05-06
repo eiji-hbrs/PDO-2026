@@ -38,14 +38,17 @@ if(isset($_POST['email_message'],$_POST['texte_message'])){
     if ($email!==false &&  $text!==""){
         // préparation de la requète (pour s'habituer ;-)
         $sql = "INSERT INTO `message` (`email_message`,`texte_message`)
-        VALUE ('$email','$text');";
+        VALUE ('$email','$text'), ('$email','$text');";
         // Execution de l'insertion qui contiendra le nombre
         // de ligne affectées pas la requête
         $nb_affected_line = $connectDB->exec($sql);
-        
+
+        // on veut récupérer le dernier id insérer (par vous sur 1 insertion)
+        $last_insert_id = $connectDB->lastInsertId();
+
         // si au moins une ligne est affectée (1 == true, 0 == false)
         if($nb_affected_line)
-            $thanks = "Merci pour l'ajout";
+            $thanks = "Merci pour l'ajout de l'ID $last_insert_id : $nb_affected_line ligne";
 
     }
 
@@ -53,7 +56,7 @@ if(isset($_POST['email_message'],$_POST['texte_message'])){
 
 
 // On récupère les messages
-$request = $connectDB->query("SELECT * FROM `message`");
+$request = $connectDB->query("SELECT * FROM `message` ORDER BY `date_message` DESC");
 
 // On compte le nombre de message(s) affecté(s) ici récupéré(s)
 $nbMessage = $request->rowCount();
@@ -85,6 +88,7 @@ $connectDB = null;
     <title>Livre d'or | Evénement ABC</title>
 </head>
 <style>
+  /* Variables — reprises du portfolio kukicha_dev */
   :root {
     --orange: #f07020;
     --green:  #44ff99;
@@ -99,6 +103,7 @@ $connectDB = null;
     --font-display: 'Bebas Neue', sans-serif;
   }
 
+  /* Reset basique */
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -116,6 +121,7 @@ $connectDB = null;
     overflow-x: hidden;
   }
 
+  /* Effet scanlines retro CRT, tres subtil */
   body::before {
     content: "";
     position: fixed;
@@ -131,6 +137,7 @@ $connectDB = null;
     z-index: 9000;
   }
 
+  /* Container principal centre */
   body > * {
     max-width: 720px;
     margin-left: auto;
@@ -292,7 +299,7 @@ $connectDB = null;
   }
 </style>
 <body>
-    <h1>Livre d'oir</h1>
+    <h1>Livre d'or</h1>
     <p>Merci de me laisser un message sur l'événement ABC</p>
     <?php
     if(isset($thanks)):
@@ -333,7 +340,7 @@ $connectDB = null;
         foreach($results as $result):
     ?>
     <div class="reponse">
-        <h5><?= $result['email_message'] ?> a écrit à <?= $result['date_message'] ?></h5>
+        <h5>ID : <?=  $result['id_message'] ?> | <?= $result['email_message'] ?> a écrit à <?= $result['date_message'] ?></h5>
         <p><?= nl2br($result['texte_message']); // retour automatique à la ligne ?></p>
         <hr>
     </div>
