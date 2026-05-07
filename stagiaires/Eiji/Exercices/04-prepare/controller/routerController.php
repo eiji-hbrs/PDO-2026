@@ -14,4 +14,7 @@ $livre = readLivres();
 
 
 // appel de la vue
-include ROOT_PROJECT."/view/homapage.view.php";
+include ROOT_PROJECT."/view/homepage.view.php";
+
+// 
+$db = null;

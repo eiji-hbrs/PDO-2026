@@ -1,7 +1,7 @@
 <?php
 // chargement de la configuration
 // de la DB 
-require_once 'config-dev.php';
+require_once '../config-dev.php';
 
 // tentative de connexion
 try{
@@ -21,7 +21,7 @@ try{
 }
 
 // appel de votre router
-require_once ROOT_PROJECT."../controller/routerController.php";
+require_once ROOT_PROJECT."/controller/routerController.php";
 
 // fermeture de connexion
 $db = null;
