@@ -13,9 +13,20 @@
     } ?>
     <div class="container">
         <h1>📖 Livre d'or</h1>
-        <?php if (isset($erreur)) {
-            echo ($erreur);
-        }; ?>
+
+        <!-- on a posté un message et ça a fonctionné -->
+        <?php if(isset($insert) && $insert === true):
+         ?>
+        <button class="btn-valid">Merci pour votre commentaire</button>
+        <?php
+        // on a posté un message et ça n'a pas fonctionné
+        elseif(isset($insert) && $insert === false):
+        ?>
+        <button class="btn-unvalid">Votre commentaire n'est pas valide</button>
+        <?php
+        endif;
+        ?>
+        
         <div class="form-box">
             <form method="POST" action="">
 
@@ -34,6 +45,8 @@
                 </div>
 
                 <button type="submit" class="btn">Laisser un Commentaire</button>
+
+
             </form>
         </div>
 </body>
