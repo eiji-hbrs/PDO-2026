@@ -49,5 +49,20 @@ function insertLivre(PDO $connect, array $datas) : bool{
         
 }
 function readLivres(){
+    $sql = "SELECT * FROM `livre` ORDER BY `datetime` ASC;";
+    $request = $db->query($sql);
+    // on va compter le nombre de résultat
+    $nbArticle = $request->count();
+
+    // transformation du ou des résultats en tableau indexé contenant
+    // des tableaux associatifs (lisible par PHP)
+    $articles = $request->fetchAll(PDO::FETCH_ASSOC);
+
+    // bonne pratique
+    $request->closeCursor();
+    // bonne pratique DB
+    $db = null;
+
+    
     return "Nos livres";
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +44,11 @@
                     <textarea id="text" name="text" ></textarea>
                 </div>
 
-                <button type="submit" class="btn">Laisser un Commentaire</button>
+                <?php var_dump($_POST);?>
+                <div class="message"><?=$livre?></div>
+                <div class="comments"> Nombres de commentaires : on affiche le nombre de commentaire avec | Pas encore commentaire | il y a 1 commentaire | il y a x commentaires</div>
+                
+                <button type="submit" class="btn">Laisser un commentaire</button>
 
 
             </form>

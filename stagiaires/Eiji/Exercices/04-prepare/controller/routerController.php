@@ -12,7 +12,7 @@ if(isset($_POST['email'],$_POST['title'],$_POST['text'])){
     // on reçoit -true en cas de réussite ou -false en cas d'échec
     $insert = insertLivre($db, $_POST);
 }
-
+// on prend les messages
 $livre = readLivres();
 
 
