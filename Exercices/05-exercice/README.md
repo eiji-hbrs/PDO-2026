@@ -6,4 +6,4 @@
 - création d'un `README.md` pour la marche à suivre (pour vous, en faire une checkliste de l'avancée du projet)
 - création de 5 dossiers
     - `data` (contiendra un base de donnée en .sql), et lesz divers fichiers servant au projet
-    
+    - `public` dossier visible pour les utilisateurs, contient le contrôleur frontal, les dossiers `img`, `css`, `js`
