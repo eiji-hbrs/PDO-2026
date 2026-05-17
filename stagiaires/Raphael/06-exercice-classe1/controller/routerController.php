@@ -23,7 +23,14 @@ try{
 if(isset($_POST['email'],$_POST['full_name'],$_POST['title'],$_POST['text_comment'])){
     // envoi de nos variables nécessaires à l'insertion
     $insert = addCommentaire($connectDB,$_POST['email'],$_POST['full_name'],$_POST['title'],$_POST['text_comment']);
+
+if ($insert) {
+        header("Location: ./?page=comments&merci=1");
+        exit;
+    }
 }
+
+$nbCommentaires = countAllCommentaires($connectDB);
 
 
 
@@ -36,6 +43,9 @@ if(!isset($_GET['page'])){
 // acceptée dans la constante de type array PUBLIC_PAGES
 }elseif(in_array($_GET['page'],PUBLIC_PAGES)){
 
+    if ($_GET['page'] === 'comments') {
+            $commentaires = readAllCommentaires($connectDB);
+        }
   // si la variable get correspond à une valeur
   // acceptée dans le tableau
   include PROJECT_PATH."/view/".$_GET['page'].".html".".php";

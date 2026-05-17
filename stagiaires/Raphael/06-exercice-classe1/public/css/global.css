@@ -1,3 +1,26 @@
-body{
+body {
     text-align: center;
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+    background: linear-gradient(59deg, #000000, #000000, #0d120e, #0c130d, #00ff04);
+    color: aliceblue;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: auto;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255,0.1);
+    border-radius: 10%;
+    border: 1px solid white;
+    color: pink;
 }

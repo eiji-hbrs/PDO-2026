@@ -12,12 +12,27 @@ function addCommentaire(PDO $db,string $email, string $fullName, string $title, 
         $fullName = htmlspecialchars(trim(strip_tags($fullName)));
         $title = htmlspecialchars(trim(strip_tags($title)));
         $text_comment = htmlspecialchars(trim(strip_tags($text_comment)));
+
+        if (mb_strlen($email) > 120) {
+        return false;
+    }   
+        if (mb_strlen($fullName) < 5 || mb_strlen($fullName) > 120) {
+        return false;
+    }
+         if (mb_strlen($title) < 5 || mb_strlen($title) > 180) {
+        return false;
+    }
+        if (mb_strlen($text_comment) < 5 || mb_strlen($text_comment) > 1000) {
+        return false;
+    }
         
     // si au moins une des variables n'est pas valide
         # vérification si il y a un probleme
         if($email===false || empty($fullName) || empty($title) || empty($text_comment))
                          # envoi de false et arrêt de la fonction
                          return false;
+
+        
 
         // Entrées utilisateur = requête préparée
             # avec marqueur nommé (:mot)
@@ -33,12 +48,21 @@ function addCommentaire(PDO $db,string $email, string $fullName, string $title, 
             return $retour; // true en cas de réussite, false en cas d'échec
 }
 
-function readAllCommentaires(){
-
+function readAllCommentaires(PDO $db): array{
+    $request = $db->query("SELECT * FROM `commentaire` ORDER BY `post_date` DESC");
+    return $request->fetchALL(PDO::FETCH_ASSOC);
 }
 
-function countAllCommentaires(){
-    
+function countAllCommentaires(PDO $db): int
+{
+    $request = $db->query("
+        SELECT COUNT(*) AS total
+        FROM `commentaire`
+    ");
+
+    $result = $request->fetch(PDO::FETCH_ASSOC);
+
+    return (int) $result['total'];
 }
 
 // bonus pagination
