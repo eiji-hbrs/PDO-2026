@@ -2,8 +2,30 @@
 // stagiaires/Michael/06-exercice-classe1/controller/routerController.php
 
 # Importer le fichier model qui contient nos fonctions de la table commentaire
+require PROJECT_PATH."/model/CommentaireModel.php";
+
+
+
 
 # Création de notre connexion PDO (avec try catch)
+// Connection à notre base de donnée
+try{
+    $connectDB = new PDO(MARIA_DSN, DB_CONNECT_USER, DB_CONNECT_PWD);
+}catch(Exception $e){
+    // arrêt et affichage de l'erreur (en dev)
+    die($e->getMessage());
+}
+
+
+// lien formulaire => fonctions
+
+// On a evnoyé le formulaire
+if(isset($_POST['email'],$_POST['full_name'],$_POST['title'],$_POST['text_comment'])){
+    // envoi de nos variables nécessaires à l'insertion
+    $insert = addCommentaire($connectDB,$_POST['email'],$_POST['full_name'],$_POST['title'],$_POST['text_comment']);
+}
+
+
 
 # suivant les actions utilisateur, appelez les vues.
 
