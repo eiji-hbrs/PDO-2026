@@ -1,44 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'accueil</title>
+    <title>Ajouter un commentaire</title>
     <link rel="stylesheet" href="css/global.css">
 </head>
 <body>
-    <header>
-    <h1>Page d'accueil</h1>
-    <nav>
-    <a href="./">Accueil</a>
-    <a href="?page=comments">commentaires</a>
-    <a href="?page=addcomments">Ajouter un commentaire</a>
+
+<header class="site-header">
+    <h1>Ajouter un commentaire</h1>
+
+    <nav class="nav">
+        <a href="./">Accueil</a>
+        <a href="?page=comments">Commentaires</a>
+        <a href="?page=addcomments">Ajouter un commentaire</a>
     </nav>
-    </header>
-    <main>
-        <form method="POST" action="">
-    <div>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
-    </div>
+</header>
 
-    <div>
-        <label for="full_name">Nom complet</label>
-        <input type="text" name="full_name" id="full_name" required>
-    </div>
+<main>
+    <form class="form-card" method="POST" action="">
+        <h2>Votre avis sur ma passion</h2>
 
-    <div>
-        <label for="title">Titre</label>
-        <input type="text" name="title" id="title" required>
-    </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                maxlength="120"
+                required
+            >
+        </div>
 
-    <div>
-        <label for="text_comment">Commentaire</label>
-        <textarea name="text_comment" id="text_comment" required></textarea>
-    </div>
+        <div class="form-group">
+            <label for="full_name">Nom complet</label>
+            <input 
+                type="text" 
+                name="full_name" 
+                id="full_name" 
+                minlength="5"
+                maxlength="120"
+                required
+            >
+        </div>
 
-    <button type="submit">Envoyer</button>
-</form>
-    </main>
+        <div class="form-group">
+            <label for="title">Titre</label>
+            <input 
+                type="text" 
+                name="title" 
+                id="title" 
+                minlength="5"
+                maxlength="180"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="text_comment">Commentaire</label>
+            <textarea 
+                name="text_comment" 
+                id="text_comment" 
+                minlength="5"
+                maxlength="1000"
+                required
+            ></textarea>
+        </div>
+
+        <button type="submit">Envoyer le commentaire</button>
+    </form>
+</main>
+
 </body>
 </html>
